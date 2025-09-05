@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Data folder
+data/
+
+# Server build output
+server/dist/
