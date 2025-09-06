@@ -6,6 +6,7 @@ import Badge from "./components/badge";
 import Alert from "./components/alert";
 import Divider from "./components/divider";
 import InputText from "./components/inputText";
+import InputCheckbox from "./components/inputCheckbox";
 import SearchIcon from "./assets/icons/search.svg?react";
 
 export default function App() {
@@ -53,6 +54,9 @@ export default function App() {
 
 			<div>
 				<InputText icon={SearchIcon} placeholder="Buscar Foto" />
+			</div>
+			<div>
+				<InputCheckbox />
 			</div>
 		</div>
 	);
