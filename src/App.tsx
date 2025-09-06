@@ -1,10 +1,12 @@
 import Button from "./components/button";
-import ButtonIcon from "./components/button-icon";
+import ButtonIcon from "./components/buttonIcon";
 import ChevronLeftIcon from "./assets/icons/chevron-left.svg?react";
 import ChevronRightIcon from "./assets/icons/chevron-right.svg?react";
 import Badge from "./components/badge";
 import Alert from "./components/alert";
 import Divider from "./components/divider";
+import InputText from "./components/inputText";
+import SearchIcon from "./assets/icons/search.svg?react";
 
 export default function App() {
 	return (
@@ -47,6 +49,10 @@ export default function App() {
 
 			<div>
 				<Divider />
+			</div>
+
+			<div>
+				<InputText icon={SearchIcon} placeholder="Buscar Foto" />
 			</div>
 		</div>
 	);
