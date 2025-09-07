@@ -52,7 +52,7 @@ interface InputTextProps
   }
 
 
-export default function inputText({size, disabled, className, icon, error, ...props}: InputTextProps) {
+export default function InputText({size, disabled, className, icon, error, ...props}: InputTextProps) {
   return (
     <div className={inputTextContainerVariants({className})}>
       <div className={inputTextWrapperVariants({size, disabled})}>
