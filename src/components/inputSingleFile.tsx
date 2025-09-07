@@ -39,14 +39,15 @@ interface InputSingleFileProps extends VariantProps<typeof inputSingleFileVarian
       form: any;
       allowedExtensions: string[]
       maxFileSizeinMB: number;
+      replaceBy: React.ReactNode;
       error?: React.ReactNode;
 }
 
-export default function InputSingleFile({ form, allowedExtensions, maxFileSizeinMB, size, error, ...props }: InputSingleFileProps) {
+export default function InputSingleFile({ form, allowedExtensions, maxFileSizeinMB, replaceBy, size, error, ...props }: InputSingleFileProps) {
       const formValues = useWatch({ control: form.control });
       const name = props.name || "";
       const formFile: File = useMemo(() => formValues[name]?.[0], [formValues, name]);
-      const {fileExtension, fileSize} = useMemo(() => ({ 
+      const { fileExtension, fileSize } = useMemo(() => ({
             fileExtension: formFile?.name?.split('.')?.pop()?.toLocaleLowerCase() || "",
             fileSize: formFile?.size || 0,
       }), [formFile]);
@@ -54,12 +55,12 @@ export default function InputSingleFile({ form, allowedExtensions, maxFileSizein
       function isValidExtension() {
             return allowedExtensions.includes(fileExtension);
       }
-      function isValidSize(){
+      function isValidSize() {
             // fileSize é recebido em bytes, não MB. Por isso multiplico
             return fileSize <= maxFileSizeinMB * 1024 * 1024;
       }
 
-      function isValidFile(){
+      function isValidFile() {
             return isValidExtension() && isValidSize();
       }
 
@@ -90,9 +91,13 @@ export default function InputSingleFile({ form, allowedExtensions, maxFileSizein
                               )}
                         </>) : (
                               <>
+                                    <div>
+                                          {replaceBy}
+                                    </div>
+
                                     <div className={`flex gap-3 items-center
-                              border border-solid border-border-primary mt-5
-                              p-3 rounded`}>
+                                    border border-solid border-border-primary mt-5
+                                    p-3 rounded`}>
                                           <Icon svg={FileImageIcon} className="fill-white w-6 h-6" />
                                           <div className="flex flex-col">
                                                 <div className="truncate max-w-80">
@@ -105,7 +110,7 @@ export default function InputSingleFile({ form, allowedExtensions, maxFileSizein
                                                             variant: "label-small",
                                                             className: "text-accent-red cursor-pointer hover:underline"
                                                       })}
-                                                      onClick={() => form.setValue(name, undefined)}>
+                                                            onClick={() => form.setValue(name, undefined)}>
                                                             Remover
                                                       </button>
                                                 </div>
