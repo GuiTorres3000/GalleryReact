@@ -1,7 +1,8 @@
 import { type VariantProps, tv } from "tailwind-variants"
 import Icon from "./icon";
-import Text from "./text";
+import Text, { textVariants } from "./text";
 import UpdateFileIcon from "../assets/icons/upload-file.svg?react"
+import FileImageIcon from "../assets/icons/image.svg?react"
 
 export const inputSingleFileVariants = tv({
       base: `flex flex-col items-center justify-center w-full
@@ -53,6 +54,26 @@ export default function inputSingleFile({size, error}: InputSingleFileProps) {
             {error && (
                   <Text variant="label-small" className="text-accent-red">Erro no campo</Text>
             )}
+            <div className={`flex gap-3 items-center
+                  border border-solid border-border-primary mt-5
+                  p-3 rounded`}>
+                  <Icon svg={FileImageIcon} className="fill-white w-6 h-6" />
+                  <div className="flex flex-col">
+                        <div className="truncate maw-w-80">
+                              <Text variant="label-medium" className="text-placeholder">
+                                    Nome do arquivo.png
+                              </Text>
+                        </div>
+                        <div className="flex">
+                              <button type="button" className={textVariants({
+                                    variant: "label-small",
+                                    className: "text-accent-red cursor-pointer hover:underline"
+                              })}>
+                                    Remover
+                              </button>
+                        </div>
+                  </div>
+            </div>
     </div>
   )
 }
