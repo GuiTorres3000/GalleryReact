@@ -6,6 +6,7 @@ export default function GeneralLayout() {
             <div>
                   <MainHeader className="mt-9"/>
                   <Outlet />
+
             </div>           
       )
 }
