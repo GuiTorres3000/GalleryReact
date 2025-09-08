@@ -11,6 +11,9 @@ import InputSingleFile from "./components/inputSingleFile";
 import SearchIcon from "./assets/icons/search.svg?react";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/imageFilePreview";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import { DialogContent } from "./components/dialog";
+import Text from "./components/text";
 
 export default function App() {
 	const form = useForm();
@@ -72,6 +75,17 @@ export default function App() {
 				maxFileSizeinMB={20} 
 				replaceBy={<ImageFilePreview src={fileSrc} alt="Imagem" />}
 				{...form.register('file')}/>
+			</div>
+
+			<div>
+				<Dialog>
+					<DialogTrigger asChild>
+						<Button>Abrir Modal</Button>
+					</DialogTrigger>
+					<DialogContent>
+						<Text>Teste Modal</Text>
+					</DialogContent>
+				</Dialog>
 			</div>
 		</div>
 	);
