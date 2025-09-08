@@ -12,7 +12,7 @@ import SearchIcon from "./assets/icons/search.svg?react";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/imageFilePreview";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { DialogContent } from "./components/dialog";
+import { DialogContent, DialogHeader } from "./components/dialog";
 import Text from "./components/text";
 
 export default function App() {
@@ -83,6 +83,9 @@ export default function App() {
 						<Button>Abrir Modal</Button>
 					</DialogTrigger>
 					<DialogContent>
+						<DialogHeader>
+							Titulo
+						</DialogHeader>
 						<Text>Teste Modal</Text>
 					</DialogContent>
 				</Dialog>
