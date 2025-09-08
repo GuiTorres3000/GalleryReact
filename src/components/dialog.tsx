@@ -33,11 +33,7 @@ export function DialogContent({ className, ref, children, ...props }: React.Comp
       );
 }
 
-export function DialogHeader({
-      children,
-      className,
-      ...props
-}: React.ComponentProps<"div">) {
+export function DialogHeader({ children, className, ...props }: React.ComponentProps<"div">) {
       return (
             <>
                   <header className={cn(
@@ -53,11 +49,34 @@ export function DialogHeader({
                               <ButtonIcon icon={XIcon} variant="ghost" />
                         </DialogClose>
                   </header>
-                  <Divider className="mt-1.5 mb-5"/>
+                  <Divider className="mt-1.5 mb-5" />
             </>
       )
 }
 
+export function DialogBody({ children, ...props }: React.ComponentProps<"div">) {
+      return <div {...props}>
+            {/* Se children for só uma string, formatar o texto com componente text*/}
+            {typeof children === "string" ? (
+                  <Text variant="label-medium" className="flex-1">
+                        {children}
+                  </Text>
+            ) : (
+                  children
+            )}
+      </div>
+}
+
+export function DialogFooter({ children, ...props }: React.ComponentProps<"div">) {
+      return (
+            <div {...props}>
+                  <Divider className="mt-5 mb-3" />
+                  <footer className="flex items-center justify-end gap-3">
+                        {children}
+                  </footer>
+            </div>
+      );
+}
 
 export function DialogOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
       return <DialogPrimitive.Overlay

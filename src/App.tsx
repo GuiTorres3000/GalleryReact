@@ -11,15 +11,14 @@ import InputSingleFile from "./components/inputSingleFile";
 import SearchIcon from "./assets/icons/search.svg?react";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/imageFilePreview";
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { DialogContent, DialogHeader } from "./components/dialog";
-import Text from "./components/text";
+import { Dialog, DialogClose, DialogTrigger } from "@radix-ui/react-dialog";
+import { DialogBody, DialogContent, DialogFooter, DialogHeader } from "./components/dialog";
 
 export default function App() {
 	const form = useForm();
 	const file = form.watch("file");
 	const fileSrc = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
-	
+
 	return (
 		<div className="grid gap-7 p-6">
 			<div className="flex gap-3">
@@ -70,14 +69,6 @@ export default function App() {
 			</div>
 
 			<div>
-				<InputSingleFile form={form} 
-				allowedExtensions={["png", "jpg", "jpeg", "webp"]}
-				maxFileSizeinMB={20} 
-				replaceBy={<ImageFilePreview src={fileSrc} alt="Imagem" />}
-				{...form.register('file')}/>
-			</div>
-
-			<div>
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button>Abrir Modal</Button>
@@ -86,7 +77,31 @@ export default function App() {
 						<DialogHeader>
 							Titulo
 						</DialogHeader>
-						<Text>Teste Modal</Text>
+						<DialogBody>
+							<div className="mb-4">
+								<Alert>
+									Tamanho máximo: 50MB
+									<br />
+									Você pode selecionar arquivos em PNG, JPG, JPEG ou WEBP
+								</Alert>
+							</div>
+
+							<div>
+								<InputSingleFile form={form}
+									allowedExtensions={["png", "jpg", "jpeg", "webp"]}
+									maxFileSizeinMB={20}
+									replaceBy={<ImageFilePreview src={fileSrc} alt="Imagem" />}
+									{...form.register('file')} />
+							</div>
+
+						</DialogBody>
+						<DialogFooter>
+							<DialogClose asChild>
+								<Button variant="secondary">Cancelar</Button>
+							</ DialogClose>
+							<Button variant="primary">Adicionar</Button>
+
+						</DialogFooter>
 					</DialogContent>
 				</Dialog>
 			</div>
