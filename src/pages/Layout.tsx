@@ -5,10 +5,8 @@ import ChevronRightIcon from "../assets/icons/chevron-right.svg?react";
 import Badge from "../components/badge";
 import Alert from "../components/alert";
 import Divider from "../components/divider";
-import InputText from "../components/inputText";
 import InputCheckbox from "../components/inputCheckbox";
 import InputSingleFile from "../components/inputSingleFile";
-import SearchIcon from "../assets/icons/search.svg?react";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "../components/imageFilePreview";
 import { Dialog, DialogClose, DialogTrigger } from "@radix-ui/react-dialog";
@@ -61,9 +59,6 @@ export default function Layout() {
 				<Divider />
 			</div>
 
-			<div>
-				<InputText icon={SearchIcon} placeholder="Buscar Foto" />
-			</div>
 			<div>
 				<InputCheckbox />
 			</div>
