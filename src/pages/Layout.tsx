@@ -8,7 +8,7 @@ import Divider from "../components/divider";
 import InputCheckbox from "../components/inputCheckbox";
 import InputSingleFile from "../components/inputSingleFile";
 import { useForm } from "react-hook-form";
-import ImageFilePreview from "../components/imageFilePreview";
+import ImagePreview from "../components/imagePreview";
 import { Dialog, DialogClose, DialogTrigger } from "@radix-ui/react-dialog";
 import { DialogBody, DialogContent, DialogFooter, DialogHeader } from "../components/dialog";
 
@@ -85,7 +85,7 @@ export default function Layout() {
 								<InputSingleFile form={form}
 									allowedExtensions={["png", "jpg", "jpeg", "webp"]}
 									maxFileSizeinMB={20}
-									replaceBy={<ImageFilePreview src={fileSrc} alt="Imagem" />}
+									replaceBy={<ImagePreview src={fileSrc} alt="Imagem" />}
 									{...form.register('file')} />
 							</div>
 
