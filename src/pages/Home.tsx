@@ -1,33 +1,36 @@
 import Container from "../components/container";
-import PhotosList from "../contexts/photos/components/PhotosList";
+import AlbunsFilter from "../contexts/album/components/albunsFilter";
+import PhotosList from "../contexts/photos/components/photosList";
+
 export default function Home() {
   return (
     <Container>
+      <AlbunsFilter albums={[{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" }]} loading={false} className="mb-2"/>
       <PhotosList photos={[
         { id: "321", 
-          title: "Olá mundo", 
+          title: "Fotinho legal", 
           imageId: "portrait-tower.png", 
-          albums: [{ id: "333", title: "Odio" }, { id: "222", title: "baby i'm preeing on you tonight" }, { id: "222", title: "raiva" },] 
+          albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },] 
         },
          { id: "123", 
           title: "Olá mundo", 
           imageId: "portrait-tower.png", 
-          albums: [{ id: "333", title: "Odio" }, { id: "222", title: "baby i'm preeing on you tonight" }, { id: "222", title: "raiva" },] 
+          albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },] 
         },
         { id: "3", 
-          title: "Olá mundo", 
+          title: "Olá mundo!", 
           imageId: "portrait-tower.png", 
-          albums: [{ id: "333", title: "Odio" }, { id: "222", title: "baby i'm preeing on you tonight" }, { id: "222", title: "raiva" },] 
+          albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },] 
         },
         { id: "13", 
-          title: "Titulo bem grandao", 
+          title: "Titulo titulo titulo", 
           imageId: "portrait-tower.png", 
-          albums: [{ id: "333", title: "Odio" }, { id: "222", title: "baby i'm preeing on you tonight" }, { id: "222", title: "raiva" },] 
+          albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },] 
         },
         { id: "13", 
-          title: "Titulo bem bem bem bem bembbemb embme grandao", 
+          title: "Titulo gigantic ultra hiper title", 
           imageId: "portrait-tower.png", 
-          albums: [{ id: "333", title: "Odio" }, { id: "222", title: "baby i'm preeing on you tonight" }, { id: "222", title: "raiva" },] 
+          albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },] 
         },
       ]} loading={false}/>
     </Container>
