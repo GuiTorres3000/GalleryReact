@@ -57,7 +57,7 @@ export default function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
                         </div>
 
                         {!loading ? (
-                              <Link to={`/fotos/${photo.id}`} className={buttonVariants({ variant: "secondary", className: "px-2 py-2" })}>
+                              <Link to={`/photo/${photo.id}`} className={buttonVariants({ variant: "secondary", className: "px-2 py-2" })}>
                                     <Text className={buttonTextVariants({ variant: "secondary", size: "sm" })}>Detalhes da Imagem</Text>
                               </Link>
                         ) : (
