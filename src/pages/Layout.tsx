@@ -48,14 +48,6 @@ export default function Layout() {
 			</div>
 
 			<div>
-				<Alert>
-					Tamanho máximo: 50MB
-					<br />
-					Você pode selecionar arquivos em PNG, JPG, JPEG ou WEBP
-				</Alert>
-			</div>
-
-			<div>
 				<Divider />
 			</div>
 
