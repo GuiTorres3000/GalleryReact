@@ -6,6 +6,7 @@ import type { Photo } from "../contexts/photos/models/photo";
 import PhotosNavigator from "./PhotosNavigator";
 import ImagePreview from "../components/imagePreview";
 import Button from "../components/button";
+import AlbumsListSelectable from "../contexts/album/components/albumsListSelectable";
 
 export default function PhotoDetail() {
 
@@ -52,7 +53,9 @@ export default function PhotoDetail() {
 
         <div className="py-3">
           <Text as="h3" variant="heading-medium" className="mb-6">Álbums</Text>
+          <AlbumsListSelectable photo={photo} albums={photo.albums}/>
         </div>
+      </div>
     </Container>
   )
 }
