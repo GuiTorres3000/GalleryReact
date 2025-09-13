@@ -7,6 +7,7 @@ import type { Photo } from "../../photos/models/photo";
 import SelectCheckboxIlustration from "../../../assets/images/select-checkbox.svg?react"
 import Skeleton from "../../../components/skeleton";
 import ImagePreview from "../../../components/imagePreview";
+import PhotoImageSelectable from "../../photos/components/photoImageSelectable";
 interface AlbumDialogProps {
       trigger: React.ReactNode;
 }
@@ -26,6 +27,10 @@ export default function AlbumDialog({ trigger }: AlbumDialogProps) {
             albums: [{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" },]
       }]
 
+      function handleTogglePhoto(selected: boolean, photoId: string){
+            console.log(selected, photoId);
+      }
+
       return (
             <Dialog>
                   <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -35,10 +40,17 @@ export default function AlbumDialog({ trigger }: AlbumDialogProps) {
                               <InputText placeholder="Adicione um titulo" />
                               {!isLoadingPhotos && photos.length > 0 && (
                                     <div className="flex flex-wrap gap-2">
-                                          {photos.map((photo) =>
-                                                <ImagePreview key={photo.id} src={`/images/${photo.imageId}`} 
-                                                imageClassname="w-20 h-20 rouded" />
-                                          )}
+                                          {photos.map((photo) => (
+                                                <PhotoImageSelectable
+                                                      key={photo.id}
+                                                      src={`/images/${photo.imageId}`}
+                                                      title={photo.title}
+                                                      imageClassname="w-20 h-20"
+                                                      onSelectImage={(selected) => (
+                                                            handleTogglePhoto(selected, photo.id)
+                                                      )}
+                                                />
+                                          ))}
                                     </div>
                               )}
 

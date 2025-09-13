@@ -8,11 +8,11 @@ import Text from "../../../components/text";
 import Skeleton from "../../../components/skeleton";
 import { useForm } from "react-hook-form";
 
-interface PhotoNewDialogProps {
+interface PhotoDialogProps {
       trigger: React.ReactNode;
 }
 
-export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
+export default function PhotoDialog({ trigger }: PhotoDialogProps) {
 
       const form = useForm();
       const isLoading = false;
