@@ -4,21 +4,24 @@ import Layout from "./pages/Layout";
 import GeneralLayout from "./pages/GeneralLayout";
 import Home from "./pages/Home";
 import PhotoDetail from "./pages/PhotoDetail";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<GeneralLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/photo/:id" element={<PhotoDetail />} />
-            <Route path="/components" element={<Layout />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <NuqsAdapter>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<GeneralLayout />}>
+              <Route index element={<Home />} />
+              <Route path="/photo/:id" element={<PhotoDetail />} />
+              <Route path="/components" element={<Layout />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </NuqsAdapter>
     </QueryClientProvider>
   )
 }
