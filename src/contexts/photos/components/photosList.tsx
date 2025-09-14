@@ -25,7 +25,7 @@ export default function PhotosList({ photos, loading }: PhotosListProps) {
                               <PhotoWidget key={photo.id} photo={photo} />
                         )}
 
-                        {loading && Array.from({ length: 8 }).map((_, index) =>
+                        {loading && Array.from({ length: 3 }).map((_, index) =>
                               <PhotoWidget key={`photo-loading-${index}`} photo={{} as Photo} loading={true} />
                         )}
 
