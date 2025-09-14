@@ -12,7 +12,7 @@ interface AlbumsListSelectableProps {
 }
 
 export default function AlbumsListSelectable({ albums, photo, loading }: AlbumsListSelectableProps) {
-  
+
   function isChecked(albumId: string){
     return photo?.albums?.some(album => album.id === albumId);
   }
@@ -30,7 +30,7 @@ export default function AlbumsListSelectable({ albums, photo, loading }: AlbumsL
   
   return (
     <ul className="flex flex-col gap-4">
-      {loading && albums?.length > 0 && albums.map((album, index) => (
+      {!loading && albums?.length > 0 && albums.map((album, index) => (
           <li key={album.id}>
             <div className="flex items-center justify-between gap-1">
               <Text variant="paragraph-large" className="truncate">{album.title}</Text>

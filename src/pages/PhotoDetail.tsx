@@ -7,10 +7,13 @@ import PhotosNavigator from "./PhotosNavigator";
 import ImagePreview from "../components/imagePreview";
 import Button from "../components/button";
 import AlbumsListSelectable from "../contexts/album/components/albumsListSelectable";
+import useAlbums from "../contexts/album/hooks/useAlbums";
 
 export default function PhotoDetail() {
 
   //const { id } = useParams();
+  const {albums, isLoadingAlbums } = useAlbums();
+  
   const isLoadingPhoto = false;
   const photo = {
     id: "321",
@@ -53,7 +56,7 @@ export default function PhotoDetail() {
 
         <div className="py-3">
           <Text as="h3" variant="heading-medium" className="mb-6">Álbums</Text>
-          <AlbumsListSelectable photo={photo} albums={photo.albums}/>
+          <AlbumsListSelectable photo={photo} albums={albums} loading={isLoadingAlbums}/>
         </div>
       </div>
     </Container>

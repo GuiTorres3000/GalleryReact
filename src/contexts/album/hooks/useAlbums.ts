@@ -6,7 +6,7 @@ export default function useAlbums() {
 
       const { data, isLoading } = useQuery<Album[]>({
             queryKey: ["albums"],
-            queryFn: () => fetcher("/albums")
+            queryFn: () => fetcher<Album[]>("/albums")
       });
 
       return {
