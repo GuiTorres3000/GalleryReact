@@ -15,12 +15,12 @@ export default function PhotosList({ photos, loading }: PhotosListProps) {
                         {!loading ? (
                               <div>{photos.length}</div>
                         ) : (
-                              <Skeleton className="h-5 w-5"/>     
+                              <Skeleton className="h-5 w-5" />
                         )}
 
                   </Text>
 
-                  <div className="flex flex-wrap gap-6 justify-between">
+                  <div className="grid grid-cols-3 gap-6">
                         {!loading && photos.length > 0 && photos.map(photo =>
                               <PhotoWidget key={photo.id} photo={photo} />
                         )}
@@ -29,12 +29,12 @@ export default function PhotosList({ photos, loading }: PhotosListProps) {
                               <PhotoWidget key={`photo-loading-${index}`} photo={{} as Photo} loading={true} />
                         )}
 
-                        {!loading && photos.length === 0 && (
-                              <div className="flex justify-center items-center h-full">
-                                    <Text variant="paragraph-large">Nenhuma foto encontrada</Text>
-                              </div>
-                        )}
-                  </div>
+                  {!loading && photos.length === 0 && (
+                        <div className="col-span-3 flex justify-center items-center h-full">
+                              <Text variant="paragraph-large">Nenhuma foto encontrada</Text>
+                        </div>
+                  )}
+            </div >
 
             </>
       )

@@ -17,7 +17,7 @@ export default function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
                   <div className="flex flex-col gap-4">
                         {!loading ? (
                               <div className="flex justify-center">
-                                    <ImagePreview src={`/images/${photo.imageId}`} title={photo.title} imageClassname="w-[13.5625rem] h-[13.5625rem] rounded-lg" />
+                                    <ImagePreview src={`${import.meta.env.VITE_IMAGES_URL}/${photo.imageId}`} title={photo.title} imageClassname="w-[13.5625rem] h-[13.5625rem] rounded-lg" />
                               </div>
                         ) : (
                               <div className="flex justify-center">
