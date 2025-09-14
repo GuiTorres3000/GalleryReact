@@ -1,11 +1,14 @@
 import Container from "../components/container";
-import AlbunsFilter from "../contexts/album/components/albunsFilter";
+import AlbumsFilter from "../contexts/album/components/albumsFilter";
+import useAlbums from "../contexts/album/hooks/useAlbums";
 import PhotosList from "../contexts/photos/components/photosList";
 
 export default function Home() {
+  const {albums, isLoadingAlbums} = useAlbums();
+  
   return (
     <Container>
-      <AlbunsFilter albums={[{ id: "333", title: "Test" }, { id: "123", title: "Test2" }, { id: "222", title: "AlbumCool" }]} loading={false} className="mb-2"/>
+      <AlbumsFilter albums={albums} loading={isLoadingAlbums} className="mb-2"/>
       <PhotosList photos={[
         { id: "321", 
           title: "Fotinho legal", 

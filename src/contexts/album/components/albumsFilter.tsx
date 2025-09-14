@@ -4,12 +4,12 @@ import Text from "../../../components/text";
 import type { Album } from "../models/album";
 import cx from "classnames";
 
-interface AlbunsFilterProps extends React.ComponentProps<"div"> {
+interface AlbumsFilterProps extends React.ComponentProps<"div"> {
       albums: Album[];
       loading?: boolean
 }
 
-export default function AlbunsFilter({ albums, loading, className, ...props }: AlbunsFilterProps) {
+export default function AlbumsFilter({ albums, loading, className, ...props }: AlbumsFilterProps) {
       return (
             <div className={cx("flex items-center gap-3.5 overflow-x-auto", className)} {...props}>
                   <Text variant="heading-small">Álbuns</Text>
