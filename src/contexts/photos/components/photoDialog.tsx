@@ -11,7 +11,8 @@ import { useForm } from "react-hook-form";
 import useAlbums from "../../album/hooks/useAlbums";
 import { photoFormSchema, type PhotoFormSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
+import usePhoto from "../hooks/usePhoto";
 
 interface PhotoDialogProps {
       trigger: React.ReactNode;
@@ -23,17 +24,33 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
       const form = useForm<PhotoFormSchema>({
             resolver: zodResolver(photoFormSchema),
       });
-      const file = form.watch("file");
-	const fileSrc = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
-
       const { albums, isLoadingAlbums } = useAlbums();
+      const file = form.watch("file");
+      const fileSrc = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
+
+      const { createPhoto } = usePhoto();
+      const [ isCreatingPhoto, setIsCreatingPhoto ] = useTransition();
+
+      const albumsIds = form.watch("albumsIds");
 
       useEffect(() => {
-            if(!modalOpen) form.reset();
+            if (!modalOpen) form.reset();
       }, [modalOpen, form])
 
+      function handleToggleAlbum(albumId: string) {
+            const albumsIds = form.getValues("albumsIds") || [];
+            const albumsSet = new Set(albumsIds);
+
+            albumsSet.has(albumId) ? albumsSet.delete(albumId) : albumsSet.add(albumId);
+
+            form.setValue("albumsIds", Array.from(albumsSet))
+      }
+
       function handleSubmit(payload: PhotoFormSchema) {
-            console.log(payload);
+            setIsCreatingPhoto(async () => {
+                  await createPhoto(payload);
+                  setModalOpen(false)
+            });
       }
 
       return (
@@ -55,8 +72,8 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
                                     </div>
 
                                     <InputSingleFile form={form} allowedExtensions={["png", "jpg", "jpeg", "webp"]} maxFileSizeinMB={50}
-                                          replaceBy={<ImagePreview src={fileSrc} imageClassname="w-full h-56" />} 
-                                          error={form.formState.errors.file?.message} 
+                                          replaceBy={<ImagePreview src={fileSrc} imageClassname="w-full h-56" />}
+                                          error={form.formState.errors.file?.message}
                                           {...form.register("file")}
                                     />
 
@@ -64,7 +81,10 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
                                           <Text variant="label-small">Selecionar álbuns</Text>
                                           <div className="flex flex-wrap gap-3">
                                                 {!isLoadingAlbums && albums.length > 0 && albums.map(album => (
-                                                      <Button key={album.id} variant="ghost" size="sm" className="truncate">{album.title}</Button>
+                                                      <Button key={album.id}
+                                                            variant={albumsIds?.includes(album.id) ? "primary" : "ghost"}
+                                                            size="sm" className="truncate"
+                                                            onClick={() => handleToggleAlbum(album.id)}>{album.title}</Button>
                                                 ))}
 
                                                 {isLoadingAlbums && Array.from({ length: 5 }).map((_, index) =>
@@ -75,9 +95,9 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
                               </DialogBody>
                               <DialogFooter>
                                     <DialogClose asChild>
-                                          <Button variant="secondary">Cancelar</Button>
+                                          <Button variant="secondary" disabled={isCreatingPhoto}>Cancelar</Button>
                                     </DialogClose>
-                                    <Button type="submit">Adicionar</Button>
+                                    <Button type="submit">{isCreatingPhoto ? "Adicionando" : "Adicionar"}</Button>
                               </DialogFooter>
                         </form>
                   </DialogContent>
