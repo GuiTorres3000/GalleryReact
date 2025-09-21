@@ -4,6 +4,7 @@ import { api, fetcher } from "../../../helpers/api";
 import type { PhotoFormSchema } from "../schemas";
 import { toast } from "sonner";
 import usePhotoAlbums from "./usePhotoAlbums";
+import { useNavigate } from "react-router";
 
 interface PhotoDetailResponse extends Photo {
   nextPhotoId?: string;
@@ -11,6 +12,7 @@ interface PhotoDetailResponse extends Photo {
 }
 
 export default function usePhoto(id?: string) {
+  const navigate = useNavigate();
   const { data, isLoading } = useQuery<PhotoDetailResponse>({
     queryKey: ["photo", id],
     queryFn: () => fetcher(`/photos/${id}`),
@@ -18,7 +20,7 @@ export default function usePhoto(id?: string) {
   });
 
   const queryClient = useQueryClient();
-  const {managePhotoOnAlbum} = usePhotoAlbums();
+  const { managePhotoOnAlbum } = usePhotoAlbums();
 
   async function createPhoto(payload: PhotoFormSchema) {
     try {
@@ -27,18 +29,32 @@ export default function usePhoto(id?: string) {
       });
 
       await api.post(`photos/${photo.id}/image`, { file: payload.file[0] }, {
-        headers: {"Content-Type": "multipart/form-data"}
+        headers: { "Content-Type": "multipart/form-data" }
       });
 
       if (payload.albumsIds && payload.albumsIds.length > 0) {
         await managePhotoOnAlbum(photo.id, payload.albumsIds);
       }
 
-      queryClient.invalidateQueries({ queryKey: ["photos"]});
+      queryClient.invalidateQueries({ queryKey: ["photos"] });
 
       toast.success("Foto criada com sucesso!");
     } catch (error) {
       toast.error("Erro ao criar foto!");
+      throw error;
+    }
+  }
+
+  async function deletePhoto(photoId: string) {
+    try {
+      console.log("oi")
+      await api.delete(`/photos/${photoId}`);
+
+      toast.success("Foto excluída com sucesso");
+
+      navigate("/");
+    } catch (error) {
+      toast.error("Erro ao excluir foto");
       throw error;
     }
   }
@@ -48,6 +64,8 @@ export default function usePhoto(id?: string) {
     nextPhotoId: data?.nextPhotoId,
     previousPhotoId: data?.previousPhotoId,
     isLoadingPhoto: isLoading,
-    createPhoto
+    createPhoto,
+    deletePhoto,
   };
+
 }
