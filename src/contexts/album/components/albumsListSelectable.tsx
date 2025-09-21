@@ -34,7 +34,7 @@ export default function AlbumsListSelectable({ albums, photo, loading }: AlbumsL
           <li key={album.id}>
             <div className="flex items-center justify-between gap-1">
               <Text variant="paragraph-large" className="truncate">{album.title}</Text>
-              <InputCheckbox defaultChecked={isChecked(album.id)} onClick={() => handlePhotoAlbums(album.id)} />
+              <InputCheckbox defaultChecked={isChecked(album.id)} onChange={() => handlePhotoAlbums(album.id)} disabled/>
             </div>
             {index != albums.length - 1 && <Divider className="mt-4" />}
           </li>
