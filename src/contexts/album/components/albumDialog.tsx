@@ -19,19 +19,29 @@ interface AlbumDialogProps {
 }
 
 export default function AlbumDialog({ trigger }: AlbumDialogProps) {
-      const [ modalOpen, setModalOpen ] = useState(false);
+      const [modalOpen, setModalOpen] = useState(false);
       const form = useForm<AlbumNewFormSchema>({ resolver: zodResolver(albumNewFormSchema) });
       const { photos, isLoadingPhotos } = usePhotos();
 
       useEffect(() => {
-            if(!modalOpen){
+            if (!modalOpen) {
                   form.reset();
             }
       }, [modalOpen, form]);
 
       function handleTogglePhoto(selected: boolean, photoId: string) {
-            console.log(selected, photoId);
+            const photosIds = form.getValues("photosIds") || [];
+            let newValue = [];
+
+            if (selected) {
+                  newValue = [...photosIds, photoId];
+            } else {
+                  newValue = photosIds.filter((id) => id !== photoId);
+            }
+
+            form.setValue("photosIds", newValue);
       }
+
 
       function handleSubmitPhoto(payload: AlbumNewFormSchema) {
             console.log(payload)

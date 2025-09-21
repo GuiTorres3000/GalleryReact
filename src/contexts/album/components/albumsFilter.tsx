@@ -23,7 +23,7 @@ export default function AlbumsFilter({ albums, loading, className, ...props }: A
                               onClick={() => filters.setAlbumId(null)}>Todos</Button>
                               {!loading && (
                                     albums.map((album) =>
-                                          <Button variant={filters.albumId === album.id ? "primary" : "ghost"} size="sm" className="cursor-pointer" 
+                                          <Button key={`album-button-${album.id}`} variant={filters.albumId === album.id ? "primary" : "ghost"} size="sm" className="cursor-pointer" 
                                           onClick={() => filters.setAlbumId(album.id)}>{album.title}</Button>
                                     ))}
                         </div>
