@@ -3,10 +3,8 @@ import Button from "../../../components/button";
 import { Dialog, DialogTrigger, DialogContent, DialogClose, DialogHeader, DialogBody, DialogFooter } from "../../../components/dialog";
 import InputText from "../../../components/inputText";
 import Text from "../../../components/text";
-import type { Photo } from "../../photos/models/photo";
 import SelectCheckboxIlustration from "../../../assets/images/select-checkbox.svg?react"
 import Skeleton from "../../../components/skeleton";
-import ImagePreview from "../../../components/imagePreview";
 import PhotoImageSelectable from "../../photos/components/photoImageSelectable";
 import usePhotos from "../../photos/hooks/usePhotos";
 import { useForm } from "react-hook-form";
